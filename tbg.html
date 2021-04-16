@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<head>
+  <title>Trung bình giá - Bitcoin Calculation</title>
+  <style>
+    table {
+      font-family: arial, sans-serif;
+      border-collapse: collapse;
+      width: 100%;
+    }
+    
+    td, th {
+      border: 1px solid #dddddd;
+      text-align: left;
+      padding: 8px;
+    }
+    
+    tr:nth-child(even) {
+      background-color: #dddddd;
+    }
+    </style>
+</head>
+<body>
+  <h3>Tiền Nhập</h3>
+  <div>
+    <label>Nhập tổng tiền mua - giá coins 1:</label>
+    <input id="money1" type="number" placeholder="money1">
+    <input id="price1" type="number" placeholder="coin1">
+  </div>
+  <div>
+    <label>Nhập tổng tiền mua - giá coins 2:</label>
+    <input id="money2" type="number" placeholder="money2">
+    <input id="price2" type="number" placeholder="coin2">
+  </div>
+  <button id="calc-btn" style="margin-top: 20px">Tính trung bình giá</button>
+  <h3>Trung bình giá</h3>
+  <table>
+    <tr>
+      <th>Tổng tiền đổ vào</th>
+      <th>Tổng coin nhận được</th>
+      <th>Trung bình giá</th>
+      <th>Trung bình giá lời 1.2%</th>
+      <th>Tiền lời 1.2%</th>
+    </tr>
+    <tr>
+      <td id="td1-1"></td>
+      <td id="td1-2"></td>
+      <td id="td1-3"></td>
+      <td id="td1-4"></td>
+      <td id="td1-5"></td>
+    </tr>
+    <tr>
+      <td id="td2-1"></td>
+      <td id="td2-2"></td>
+      <td id="td2-3"></td>
+      <td id="td2-4"></td>
+      <td id="td2-5"></td>
+    </tr>
+    <tr>
+      <td id="td3-1"></td>
+      <td id="td3-2"></td>
+      <td id="td3-3"></td>
+      <td id="td3-4"></td>
+      <td id="td3-5"></td>
+    </tr>
+    <tr>
+      <td id="td4-1"></td>
+      <td id="td4-2"></td>
+      <td id="td4-3"></td>
+      <td id="td4-4"></td>
+      <td id="td4-5"></td>
+    </tr>
+    <tr>
+      <td id="td5-1"></td>
+      <td id="td5-2"></td>
+      <td id="td5-3"></td>
+      <td id="td5-4"></td>
+      <td id="td5-5"></td>
+    </tr>
+    <tr>
+      <td id="td6-1"></td>
+      <td id="td6-2"></td>
+      <td id="td6-3"></td>
+      <td id="td6-4"></td>
+      <td id="td6-5"></td>
+    </tr>
+  </table>
+</body>
+<script>
+  var url = new URL(location.href);
+  var startMoney = +url.searchParams.get("startMoney") || 0;
+  var endMoney = +url.searchParams.get("endMoney") || 0;
+  var startPrice = +url.searchParams.get("startPrice") || 0;
+  var endPrice = +url.searchParams.get("endPrice") || 0;
+
+  document.getElementById('money1').value = startMoney;
+  document.getElementById('money2').value = endMoney;
+  document.getElementById('price1').value = startPrice;
+  document.getElementById('price2').value = endPrice;
+
+  if (startMoney && endMoney && startPrice && endPrice) {
+    const m100 = calc(startMoney, 100, startPrice, endPrice);
+    const m200 = calc(startMoney, 200, startPrice, endPrice);
+    const m300 = calc(startMoney, 300, startPrice, endPrice);
+    const m400 = calc(startMoney, 400, startPrice, endPrice);
+    const m500 = calc(startMoney, 500, startPrice, endPrice);
+    const mCustom = calc(startMoney, endMoney, startPrice, endPrice);
+    setValue('td1', m100);
+    setValue('td2', m200);
+    setValue('td3', m300);
+    setValue('td4', m400);
+    setValue('td5', m500);
+    setValue('td6', mCustom);
+  }
+
+  function navigate(startMoney, endMoney, startPrice, endPrice) {
+    window.history.pushState('page2', 'Title', `?startMoney=${startMoney}&endMoney=${endMoney}&startPrice=${startPrice}&endPrice=${endPrice}`);
+    location.reload();
+  }
+
+  function calc(startMoney, endMoney, startPrice, endPrice) {
+    const totalMoney = startMoney + endMoney;
+    const totalCoins = (startMoney / startPrice) + (endMoney / endPrice);
+    return {
+      endMoney: endMoney,
+      totalMoney: totalMoney,
+      totalCoins: totalCoins,
+      average: (totalMoney) / totalCoins,
+      averageProfit: (totalMoney * 1.012) / totalCoins,
+      profit: (totalMoney * 1.012)
+    }
+  }
+
+  function setValue(id, result) {
+    document.getElementById(id + '-1').innerHTML = result.totalMoney  + '$   ' + '(' + result.endMoney + '$)';
+    document.getElementById(id + '-2').innerHTML = result.totalCoins + ' coins';
+    document.getElementById(id + '-3').innerHTML = result.average;
+    document.getElementById(id + '-4').innerHTML = result.averageProfit;
+    document.getElementById(id + '-5').innerHTML = result.profit + ' $';
+  }
+
+  document.getElementById("calc-btn").addEventListener("click", function(e) {
+    money1 = +document.getElementById("money1").value;
+    money2 = +document.getElementById("money2").value;
+    price1 = +document.getElementById("price1").value;
+    price2 = +document.getElementById("price2").value;
+    navigate(money1, money2, price1, price2)
+  });
+</script>

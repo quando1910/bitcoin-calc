@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<head>
+  <title>Tiền lời - Bitcoin Calculation</title>
+</head>
+<body>
+  <h3>Tiền Nhập</h3>
+  <div>
+    <label>Nhập số tiền:</label>
+    <input id="money" type="number" placeholder="money">
+    <button id="calc-btn">Tính tiền lời</button>
+  </div>
+  <h3>Tiền lời</h3>
+  <div>
+    <label>1.2%:</label>
+    <input id="1" placeholder="money" disabled>
+    <button onclick="copy('1')">Copy</button>
+  </div>
+  <div>
+    <label>2%:</label>
+    <input id="2" placeholder="money" disabled>
+    <button onclick="copy('2')">Copy</button>
+  </div>
+  <div>
+    <label>3%:</label>
+    <input id="3" placeholder="money" disabled>
+    <button onclick="copy('3')">Copy</button>
+  </div>
+  <div>
+    <label>4%:</label>
+    <input id="4" placeholder="money" disabled>
+    <button onclick="copy('4')">Copy</button>
+  </div>
+  <div>
+    <label>5%:</label>
+    <input id="5" placeholder="money" disabled>
+    <button onclick="copy('5')">Copy</button>
+  </div>
+  <div>
+    <label>10%:</label>
+    <input id="10" placeholder="money" disabled>
+    <button onclick="copy('10')">Copy</button>
+  </div>
+</body>
+<script>
+  function copy(id) {
+    var copyText = document.getElementById(id);
+    copyText.select();
+    copyText.setSelectionRange(0, 99999); /* For mobile devices */
+    document.execCommand("copy");
+    alert("Copied the text: " + copyText.value);
+  }
+  document.getElementById("calc-btn").addEventListener("click", function(e) {
+    money = +document.getElementById("money").value;
+    document.getElementById("1").value = money * 1.012;
+    document.getElementById("2").value = money * 1.02;
+    document.getElementById("3").value = money * 1.03;
+    document.getElementById("4").value = money * 1.04;
+    document.getElementById("5").value = money * 1.05;
+    document.getElementById("10").value = money * 1.1;
+  });
+</script>
