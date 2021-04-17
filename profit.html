@@ -5,38 +5,46 @@
 <body>
   <h3>Tiền Nhập</h3>
   <div>
-    <label>Nhập số tiền:</label>
+    <label>Nhập giá mua:</label>
+    <input id="price" type="number" placeholder="price">
+    <label>Nhập tổng tiền:</label>
     <input id="money" type="number" placeholder="money">
     <button id="calc-btn">Tính tiền lời</button>
   </div>
   <h3>Tiền lời</h3>
   <div>
     <label>1.2%:</label>
+    <span id="1-a"></span><span>$</span>
     <input id="1" placeholder="money" disabled>
     <button onclick="copy('1')">Copy</button>
   </div>
   <div>
     <label>2%:</label>
+    <span id="2-a"></span><span>$</span>
     <input id="2" placeholder="money" disabled>
     <button onclick="copy('2')">Copy</button>
   </div>
   <div>
     <label>3%:</label>
+     <span id="3-a"></span>
     <input id="3" placeholder="money" disabled>
     <button onclick="copy('3')">Copy</button>
   </div>
   <div>
     <label>4%:</label>
+    <span id="4-a"></span><span>$</span>
     <input id="4" placeholder="money" disabled>
     <button onclick="copy('4')">Copy</button>
   </div>
   <div>
     <label>5%:</label>
+    <span id="5-a"></span><span>$</span>
     <input id="5" placeholder="money" disabled>
     <button onclick="copy('5')">Copy</button>
   </div>
   <div>
     <label>10%:</label>
+    <span id="10-a"></span><span>$</span>
     <input id="10" placeholder="money" disabled>
     <button onclick="copy('10')">Copy</button>
   </div>
@@ -50,12 +58,22 @@
     alert("Copied the text: " + copyText.value);
   }
   document.getElementById("calc-btn").addEventListener("click", function(e) {
+    price = +document.getElementById("price").value;
     money = +document.getElementById("money").value;
-    document.getElementById("1").value = money * 1.012;
-    document.getElementById("2").value = money * 1.02;
-    document.getElementById("3").value = money * 1.03;
-    document.getElementById("4").value = money * 1.04;
-    document.getElementById("5").value = money * 1.05;
-    document.getElementById("10").value = money * 1.1;
+
+    document.getElementById("1").value = price * 1.012;
+    document.getElementById("2").value = price * 1.02;
+    document.getElementById("3").value = price * 1.03;
+    document.getElementById("4").value = price * 1.04;
+    document.getElementById("5").value = price * 1.05;
+    document.getElementById("10").value = price * 1.1;
+
+    document.getElementById("1-a").innerHTML = money * 1.012;
+    document.getElementById("2-a").innerHTML = money * 1.02;
+    document.getElementById("3-a").innerHTML = money * 1.03;
+    document.getElementById("4-a").innerHTML = money * 1.04;
+    document.getElementById("5-a").innerHTML = money * 1.05;
+    document.getElementById("10-a").innerHTML = money * 1.1;
+    
   });
 </script>
