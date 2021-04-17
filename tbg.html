@@ -17,6 +17,21 @@
     tr:nth-child(even) {
       background-color: #dddddd;
     }
+    ul {
+      display: flex;
+    }
+    .recommend-price {
+      border: 1px solid green;
+      padding: 20px;
+      margin: 10px;
+    }
+    .recommend-price div {
+      padding: 5px 0;
+    }
+    ul label {
+      font-weight: bold;
+      color: red;
+    }
     </style>
 </head>
 <body>
@@ -32,6 +47,87 @@
     <input id="price2" type="number" placeholder="coin2">
   </div>
   <button id="calc-btn" style="margin-top: 20px">Tính trung bình giá</button>
+  <h3>Lệnh tham khảo</h3>
+  <ul>
+    <li class="recommend-price">
+      <b>Limit</b>
+      <span id="td1-d"></span>
+      <div>
+        <label>Giá bán: </label><span id="td1-a"></span>
+      </div>
+      <div>
+        <label>Số coin bán: </label><span id="td1-b"></span>
+      </div>
+      <div>
+        <label>USDT: </label><span id="td1-c"></span>
+      </div>
+    </li>
+    <li class="recommend-price">
+      <b>Limit</b>
+      <span id="td2-d"></span>
+      <div>
+        <label>Giá bán: </label><span id="td2-a"></span>
+      </div>
+      <div>
+        <label>Số coin bán: </label><span id="td2-b"></span>
+      </div>
+      <div>
+        <label>USDT: </label><span id="td2-c"></span>
+      </div>
+    </li>
+    <li class="recommend-price">
+      <b>Limit</b>
+      <span id="td3-d"></span>
+      <div>
+        <label>Giá bán: </label><span id="td3-a"></span>
+      </div>
+      <div>
+        <label>Số coin bán: </label><span id="td3-b"></span>
+      </div>
+      <div>
+        <label>USDT: </label><span id="td3-c"></span>
+      </div>
+    </li>
+    <li class="recommend-price">
+      <b>Limit</b>
+      <span id="td4-d"></span>
+      <div>
+        <label>Giá bán: </label><span id="td4-a"></span>
+      </div>
+      <div>
+        <label>Số coin bán: </label><span id="td4-b"></span>
+      </div>
+      <div>
+        <label>USDT: </label><span id="td4-c"></span>
+      </div>
+    </li>
+    <li class="recommend-price">
+      <b>Limit</b>
+      <span id="td5-d"></span>
+      <div>
+        <label>Giá bán: </label><span id="td5-a"></span>
+      </div>
+      <div>
+        <label>Số coin bán: </label><span id="td5-b"></span>
+      </div>
+      <div>
+        <label>USDT: </label><span id="td5-c"></span>
+      </div>
+    </li>
+    <li class="recommend-price">
+      <b>Limit</b>
+      <span id="td6-d"></span>
+      <div>
+        <label>Giá bán: </label><span id="td6-a"></span>
+      </div>
+      <div>
+        <label>Số coin bán: </label><span id="td6-b"></span>
+      </div>
+      <div>
+        <label>USDT: </label><span id="td6-c"></span>
+      </div>
+    </li>
+  </ul>
   <h3>Trung bình giá</h3>
   <table>
     <tr>
@@ -136,6 +232,11 @@
     document.getElementById(id + '-3').innerHTML = result.average;
     document.getElementById(id + '-4').innerHTML = result.averageProfit;
     document.getElementById(id + '-5').innerHTML = result.profit + ' $';
+
+    document.getElementById(id + '-a').innerHTML = result.average * 1.005;
+    document.getElementById(id + '-b').innerHTML = result.totalCoins;
+    document.getElementById(id + '-c').innerHTML = `${(result.average * 1.005 * result.totalCoins).toFixed(3)}$`;
+    document.getElementById(id + '-d').innerHTML = `Gỡ ${result.endMoney}$`;
   }
 
   document.getElementById("calc-btn").addEventListener("click", function(e) {
